@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("mat.png") center/cover no-repeat;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.today {
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+#suggestion {
+  font-size: 4rem;
+  margin: 20px 0;
+}
+
+#suggestion a {
+  color: #1ba64e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#suggestion a:hover {
+  color: #22c55e;
+}
+
+button {
+  background: #1ba64e;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #22c55e;
+}
+
+
+.category-wrapper {
+  position: absolute; /* Låt den flyta ovanpå sidan */
+  top: 20px;          /* 20px från toppen */
+  right: 20px;        /* 20px från högerkanten */
+  z-index: 10;        /* Se till att den ligger ovanför andra element */
+}
+
+#categorySelect {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #1ba64e;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+#categorySelect:hover,
+#categorySelect:focus {
+  background: #22c55e;
+  outline: none;
+}
