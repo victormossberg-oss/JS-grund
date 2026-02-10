@@ -90,3 +90,36 @@ button:hover {
   background: #22c55e;
   outline: none;
 }
+
+/* Mobilanpassning för skärmar under 600px */
+@media (max-width: 600px) {
+
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 2rem; /* Minska storlek på rubrik */
+  }
+
+  #suggestion {
+    font-size: 2.5rem; /* Minska storlek på slumpad maträtt */
+  }
+
+  #categorySelect {
+    width: 80%;        /* Gör dropdown bredare på mobil */
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  button {
+    width: 80%;        /* Knappen tar större plats på mobil */
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  /* Flytta kategorin lite närmare toppen på mobil */
+  .category-wrapper {
+    top: 15px;
+  }
+}
