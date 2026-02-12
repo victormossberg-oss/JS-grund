@@ -30,7 +30,6 @@ const meals = [
   { name: "Tacopaj", url: "https://www.koket.se/klassisk-tacopaj-med-kottfars-och-creme-fraiche", category: "kött" },
   { name: "Spaghetti bolognese", url: "https://www.koket.se/godaste-kottfarssasen", category: "kött" },
   { name: "Mustig lövbiffsgryta", url: "https://www.koket.se/mustig-lovbiffsgryta", category: "kött" },
-
   { name: "Renskavsgryta med lingon", url: "https://www.koket.se/renskavsgryta-med-lingon", category: "kött" },
   { name: "Papas med grillat kött", url: "https://www.koket.se/papas-med-grillat-kott", category: "kött" },
   { name: "Hamburgare med tryffelmayo och karamelliserad lök", url: "https://www.koket.se/hamburgare-med-tryffelmayo-och-karamelliserad-lok", category: "kött" },
@@ -41,12 +40,16 @@ const meals = [
   { name: "Fish & chips", url: "https://www.koket.se/per-morbergs-fish-chips", category: "fisk" },
   { name: "Ugnsbakad torsk i citron- och dillsås", url: "https://www.koket.se/ugnsbakad-torsk-i-citron-och-dillsas", category: "fisk" },
   { name: "Laxsallad med bulgur, avokado och korianderdressing", url: "https://www.koket.se/laxsallad-med-bulgur-avokado-och-korianderdressing", category: "fisk" },
+  { name: "Salmon melt - Godaste mackan!", url: "https://www.koket.se/salmon-melt-godaste-mackan", category: "fisk" },
+  { name: "Gubbröra med matjessill på fröknäcke", url: "https://www.koket.se/gubbrora-med-matjessill-pa-froknacke", category: "fisk" },
 
   { name: "Blomkålscurry med saffransris", url: "https://www.koket.se/blomkalscurry-med-saffransris-donals-recept", category: "veg" },
   { name: "Asiatisk nudelsallad med hoisinfärs", url: "https://www.koket.se/asiatisk-nudelsallad-med-hoisinfars", category: "veg" },
   { name: "Krämig italiensk kikärtsgryta", url: "https://www.koket.se/kramig-italiensk-kikartsgryta", category: "veg" },
   { name: "Smakrik linsgryta", url: "https://www.koket.se/smakrik-linsgryta", category: "veg" },
   { name: "Pannkaka", url: "https://www.koket.se/pannkaka-2", category: "veg" },
+  { name: "Soppa på rostade rotfrukter", url: "https://www.koket.se/soppa-pa-rostade-rotfrukter", category: "veg" },
+  { name: "Crispy rice salad", url: "https://www.koket.se/crispy-rice-salad", category: "veg" },
 ];
 
 
