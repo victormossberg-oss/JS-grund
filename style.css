@@ -91,36 +91,77 @@ button:hover {
   outline: none;
 }
 
-/* Mobilanpassning för skärmar under 600px */
-@media (max-width: 600px) {
+/* ===== MOBIL ===== */
+@media (max-width: 768px) {
+
+  body {
+    align-items: flex-start; /* börja uppifrån istället för mitten */
+    padding-top: 80px;
+  }
 
   .container {
-    padding: 10px;
+    max-width: 100%;
+    padding: 20px;
   }
 
   h1 {
-    font-size: 2rem; /* Minska storlek på rubrik */
+    font-size: 1.8rem;
   }
 
   #suggestion {
-    font-size: 2.5rem; /* Minska storlek på slumpad maträtt */
-  }
-
-  #categorySelect {
-    width: 80%;        /* Gör dropdown bredare på mobil */
-    font-size: 0.9rem;
-    padding: 8px 12px;
+    font-size: 2.2rem;
+    line-height: 1.2;
   }
 
   button {
-    width: 80%;        /* Knappen tar större plats på mobil */
-    font-size: 0.9rem;
-    padding: 10px 12px;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
   }
 
-  /* Flytta kategorin lite närmare toppen på mobil */
+  /* Kategoriväljaren */
   .category-wrapper {
-    top: 15px;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+  }
+
+  #categorySelect {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  /* ===== FAVORITLISTA ===== */
+  .favorites-panel {
+    position: static;      /* sluta ligga till höger */
+    width: 100%;
+    margin-top: 30px;
+    background: rgba(0,0,0,0.6);
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .favorites-panel h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  #favoritesList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  #favoritesList a {
+    font-size: 0.95rem;
+  }
+
+  .remove-heart {
+    font-size: 1.4rem;
   }
 }
 
