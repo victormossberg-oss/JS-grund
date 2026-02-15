@@ -22,6 +22,60 @@ const suggestionEl = document.getElementById("suggestion");
 const categorySelect = document.getElementById("categorySelect");
 
 
+// Hämtar formuläret, inputfältet och paragrafen för meddelanden från HTML
+const mealForm = document.getElementById("mealForm");
+const mealInput = document.getElementById("mealInput");
+const formMessage = document.getElementById("formMessage");
+
+// Körs när användaren skickar formuläret
+mealForm.addEventListener("submit", function (e) {
+  // Stoppar sidan från att ladda om (standard för <form>)
+  e.preventDefault();
+
+  // Hämtar texten från inputfältet och tar bort mellanslag i början/slutet
+  const value = mealInput.value.trim();
+
+  // ======================
+  // VALIDERING
+  // ======================
+  // Kontrollerar att användaren skrivit minst 3 tecken
+  if (value.length < 3) {
+    // Visar felmeddelande
+    formMessage.textContent = "Måste vara minst 3 bokstäver.";
+    formMessage.style.color = "red";
+    return; // Avslutar funktionen om valideringen misslyckas
+  }
+
+  // ======================
+  // SPARA I FAVORITER
+  // ======================
+  // Hämtar nuvarande favoriter från localStorage
+  const favorites = getFavorites();
+
+  // Lägger till den nya maträtten i arrayen
+  favorites.push({
+  name: value,
+  url: "#",          // egen rätt har ingen länk
+  category: "egen"   // ny kategori för egna rätter
+});
+
+  // Sparar tillbaka arrayen i localStorage
+  saveFavorites(favorites);
+
+  // Uppdaterar favoritlistan på sidan direkt
+  renderFavorites();
+
+  // ======================
+  // SUCCESS-MEDDELANDE
+  // ======================
+  formMessage.textContent = "Maträtten sparades!";
+  formMessage.style.color = "lightgreen";
+
+  // Tömmer inputfältet efter sparning
+  mealInput.value = "";
+});
+
+
 // ==============================
 // LISTA MED ALLA MATRÄTTER
 // ==============================

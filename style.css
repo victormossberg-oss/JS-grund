@@ -20,6 +20,7 @@ body {
   text-align: center;
   max-width: 600px;
   padding: 20px;
+  margin: 0 300px;
 }
 
 h1 {
@@ -66,12 +67,12 @@ button:hover {
 
 
 .category-wrapper {
-  position: absolute; /* Låt den flyta ovanpå sidan */
-  top: 20px;          /* 20px från toppen */
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 10;        /* Se till att den ligger ovanför andra element */
+  position: fixed;   /* ligger fast i hörnet */
+  top: 20px;         /* avstånd från toppen */
+  right: 20px;       /* avstånd från höger */
+  z-index: 10;       /* ovanpå annat innehåll */
 }
+
 
 #categorySelect {
   padding: 10px 15px;
@@ -113,25 +114,30 @@ button:hover {
     line-height: 1.2;
   }
 
+    .add-meal {
+    position: static;
+    width: 100%;
+    margin-top: 30px;
+  }
+
   button {
     width: 100%;
     padding: 14px;
     font-size: 1rem;
   }
 
-  /* Kategoriväljaren */
   .category-wrapper {
-    position: fixed;
-    top: 10px;
+    right: auto;
     left: 50%;
     transform: translateX(-50%);
+    top: 10px;
     width: 90%;
   }
 
   #categorySelect {
     width: 100%;
-    font-size: 1rem;
   }
+}
 
   /* ===== FAVORITLISTA ===== */
   .favorites-panel {
@@ -163,7 +169,6 @@ button:hover {
   .remove-heart {
     font-size: 1.4rem;
   }
-}
 
 /* Rubrik */
 h3 {
@@ -219,3 +224,26 @@ h3 {
   transform: scale(1.2);
 }
 
+.add-meal {
+  position: fixed;
+  top: 20px;      /* SAMMA som kategorimenyn */
+  left: 20px;
+  width: 260px;
+
+  background: rgba(0,0,0,0.6);
+  padding: 15px;
+  border-radius: 12px;
+  color: white;
+}
+
+.add-meal input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+.add-meal button {
+  width: 100%;
+}
