@@ -95,155 +95,48 @@ button:hover {
 /* ===== MOBIL ===== */
 @media (max-width: 768px) {
 
+  .add-meal,
+  .favorites-panel,
+  .category-wrapper {
+    position: static;
+    width: 100%;
+    margin: 15px 0;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
+  }
+
+  /* Gör sidan som en snygg kolumn */
   body {
-    align-items: flex-start; /* börja uppifrån istället för mitten */
-    padding-top: 80px;
+    display: block;
+    padding: 10px;
   }
 
   .container {
-    max-width: 100%;
-    padding: 20px;
+    margin: 0;
+    padding: 10px;
   }
 
+  /* Mindre text så inget spricker */
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
   #suggestion {
-    font-size: 2.2rem;
-    line-height: 1.2;
+    font-size: 2rem;
   }
 
-    .add-meal {
-    position: static;
-    width: 100%;
-    margin-top: 30px;
-  }
-
+  /* Knappar full bredd */
   button {
     width: 100%;
-    padding: 14px;
-    font-size: 1rem;
   }
 
-  .category-wrapper {
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10px;
-    width: 90%;
-  }
-
-  #categorySelect {
-    width: 100%;
-  }
-}
-
-  /* ===== FAVORITLISTA ===== */
+  /* Panel-utseende */
+  .add-meal,
   .favorites-panel {
-    position: static;      /* sluta ligga till höger */
-    width: 100%;
-    margin-top: 30px;
     background: rgba(0,0,0,0.6);
-    padding: 15px;
     border-radius: 12px;
+    padding: 15px;
   }
-
-  .favorites-panel h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-
-  #favoritesList li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  #favoritesList a {
-    font-size: 0.95rem;
-  }
-
-  .remove-heart {
-    font-size: 1.4rem;
-  }
-
-/* Rubrik */
-h3 {
-  margin-top: 30px;
-  font-size: 1.6rem;
-  color: #ffffff;
-  text-align: center;
-}
-
-/* Själva listan */
-#favoritesList {
-  list-style: none;
-  padding: 0;
-  max-width: 400px;
-  margin: 20px auto;
-}
-
-/* Varje favoritkort */
-#favoritesList li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.08);
-  padding: 8px 10px;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
-
-/* Hover-effekt */
-#favoritesList li:hover {
-  transform: scale(1.03);
-}
-
-/* Länkarna */
-#favoritesList a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.remove-btn {
-  background: transparent;
-  border: none;
-  color: #ff6b6b;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.2s;
-}
-
-.remove-btn:hover {
-  color: #ff3b3b;
-  transform: scale(1.2);
-}
-
-.add-meal {
-  position: fixed;
-  top: 20px;      /* SAMMA som kategorimenyn */
-  left: 20px;
-  width: 260px;
-
-  background: rgba(0,0,0,0.6);
-  padding: 15px;
-  border-radius: 12px;
-  color: white;
-}
-
-.add-meal input {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: none;
-}
-
-.add-meal button {
-  width: 100%;
 }
