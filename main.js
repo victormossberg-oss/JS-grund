@@ -152,7 +152,7 @@ function renderFavorites() {
 // ==============================
 
 // ny slumpad maträtt
-// Klick på "ny maträtt"
+// Klick på "Ge mig nåt annat..."
 randomBtn.addEventListener("click", showRandomMeal);
 
 // spara favorit
