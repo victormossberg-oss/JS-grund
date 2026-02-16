@@ -1,85 +1,31 @@
-// Hämtar knappen för att spara favorit (om du använder en sådan i HTML)
-const saveBtn = document.getElementById("saveBtn");
-
-// Hämtar listan där favoriter ska visas
-const favoritesList = document.getElementById("favoritesList");
-
-// Variabel som håller koll på den senaste slumpade maträtten
+// ==============================
+// 1. STATE
+// ==============================
+// Variabel som sparar den senaste slumpade maträtten
+// så att vi kan lägga till den i favoriter
 let currentMeal = null;
 
 
 // ==============================
-// HÄMTA ELEMENT FRÅN HTML
+// 2. DOM-ELEMENT
 // ==============================
-
-// Knappen som slumpar fram ny maträtt
+// Hämtar alla viktiga element från HTML så vi kan använda dem i JS
 const randomBtn = document.getElementById("randomBtn");
-
-// Elementet där maträtten visas
 const suggestionEl = document.getElementById("suggestion");
-
-// Dropdown för kategorival
 const categorySelect = document.getElementById("categorySelect");
+const saveBtn = document.getElementById("saveBtn");
+const favoritesList = document.getElementById("favoritesList");
 
-
-// Hämtar formuläret, inputfältet och paragrafen för meddelanden från HTML
 const mealForm = document.getElementById("mealForm");
 const mealInput = document.getElementById("mealInput");
 const formMessage = document.getElementById("formMessage");
 
-// Körs när användaren skickar formuläret
-mealForm.addEventListener("submit", function (e) {
-  // Stoppar sidan från att ladda om (standard för <form>)
-  e.preventDefault();
-
-  // Hämtar texten från inputfältet och tar bort mellanslag i början/slutet
-  const value = mealInput.value.trim();
-
-  // ======================
-  // VALIDERING
-  // ======================
-  // Kontrollerar att användaren skrivit minst 3 tecken
-  if (value.length < 3) {
-    // Visar felmeddelande
-    formMessage.textContent = "Måste vara minst 3 bokstäver.";
-    formMessage.style.color = "red";
-    return; // Avslutar funktionen om valideringen misslyckas
-  }
-
-  // ======================
-  // SPARA I FAVORITER
-  // ======================
-  // Hämtar nuvarande favoriter från localStorage
-  const favorites = getFavorites();
-
-  // Lägger till den nya maträtten i arrayen
-  favorites.push({
-  name: value,
-  url: "#",          // egen rätt har ingen länk
-  category: "egen"   // ny kategori för egna rätter
-});
-
-  // Sparar tillbaka arrayen i localStorage
-  saveFavorites(favorites);
-
-  // Uppdaterar favoritlistan på sidan direkt
-  renderFavorites();
-
-  // ======================
-  // SUCCESS-MEDDELANDE
-  // ======================
-  formMessage.textContent = "Maträtten sparades!";
-  formMessage.style.color = "lightgreen";
-
-  // Tömmer inputfältet efter sparning
-  mealInput.value = "";
-});
-
 
 // ==============================
-// LISTA MED ALLA MATRÄTTER
+// 3. DATA
 // ==============================
-
+// Array med alla färdiga maträtter.
+// Varje maträtt är ett objekt med namn, länk och kategori.
 const meals = [
   { name: "Tacopaj", url: "https://www.koket.se/klassisk-tacopaj-med-kottfars-och-creme-fraiche", category: "kött" },
   { name: "Spaghetti bolognese", url: "https://www.koket.se/godaste-kottfarssasen", category: "kött" },
@@ -108,164 +54,155 @@ const meals = [
 
 
 // ==============================
-// SLUMPA MATRÄTT BASERAT PÅ KATEGORI
+// 4. HJÄLPFUNKTIONER
 // ==============================
+// Hämtar favoritlistan från localStorage.
+// JSON.parse gör om text → JavaScript-array.
+// Om inget finns returneras en tom array.
 
+// LocalStorage
+function getFavorites() {
+  return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+// Sparar favoritlistan i localStorage.
+// JSON.stringify gör om array → text.
+function saveFavorites(favorites) {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+// funktion som slumpar fram en maträtt baserad på vald kategori
 function getRandomMeal() {
-
-  // Börjar med hela listan
+  // Börja med hela listan
   let filteredMeals = meals;
-
-  // Hämtar vald kategori från dropdown
+  // Läs vilken kategori användaren valt
   const selectedCategory = categorySelect.value;
-
   // Om inte "alla" → filtrera listan
   if (selectedCategory !== "alla") {
     filteredMeals = meals.filter(meal => meal.category === selectedCategory);
   }
-
   // Om inga rätter finns → returnera null
-  if (filteredMeals.length === 0) {
-    return null;
-  }
-
-  // Slumpar fram ett index i arrayen
+  if (filteredMeals.length === 0) return null;
+  // Slumpa index i arrayen
   const randomIndex = Math.floor(Math.random() * filteredMeals.length);
-
-  // Returnerar slumpad maträtt
+  // Returnera slumpad maträtt
   return filteredMeals[randomIndex];
 }
 
 
 // ==============================
-// VISA SLUMPAD MATRÄTT PÅ SIDAN
+// 5. UI-FUNKTIONER
 // ==============================
-
+// Visar en slumpad maträtt på sidan
 function showRandomMeal() {
-
-  // Hämtar slumpad maträtt
+  // Hämta slumpad rätt
   const meal = getRandomMeal();
-
   // Om ingen finns → visa feltext
   if (!meal) {
     suggestionEl.textContent = "Inga rätter finns 😢";
     return;
   }
-
-  // Sparar senaste rätt så vi kan favorit-spara den
+  // Spara aktuell rätt så den kan favorit-sparas
   currentMeal = meal;
-
-  // Skriver ut som klickbar länk
+  // Visa som klickbar länk
   suggestionEl.innerHTML = `
-    <a href="${meal.url}" target="_blank">
-      ${meal.name}
-    </a>
+    <a href="${meal.url}" target="_blank">${meal.name}</a>
   `;
 }
 
-
-// ==============================
-// FAVORITER – LOCALSTORAGE
-// ==============================
-
-// Hämtar favoriter från localStorage
-function getFavorites() {
-  return JSON.parse(localStorage.getItem("favorites")) || [];
-}
-
-// Sparar favoriter till localStorage
-function saveFavorites(favorites) {
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-}
-
-
-// ==============================
-// SPARA FAVORIT (KNAPP)
-// ==============================
-
-saveBtn.addEventListener("click", () => {
-
-  // Om ingen rätt vald → gör inget
-  if (!currentMeal) return;
-
-  const favorites = getFavorites();
-
-  // Kolla om redan sparad
-  const alreadySaved = favorites.some(f => f.name === currentMeal.name);
-  if (alreadySaved) return;
-
-  // Lägg till i listan
-  favorites.push(currentMeal);
-
-  // Spara i localStorage
-  saveFavorites(favorites);
-
-  // Rita om favoritlistan
-  renderFavorites();
-});
-
-
-// ==============================
-// VISA FAVORITLISTAN PÅ SIDAN
-// ==============================
-
+// Ritar upp favoritlistan på sidan
 function renderFavorites() {
-
+  // Hämta sparade favoriter
   const favorites = getFavorites();
-
   // Töm listan innan vi ritar om
   favoritesList.innerHTML = "";
-
-  // Om inga favoriter finns
+  // Om listan är tom → visa text
   if (favorites.length === 0) {
     favoritesList.innerHTML = "<li>Inga favoriter ännu</li>";
     return;
   }
-
   // Loopa igenom alla favoriter
   favorites.forEach((meal, index) => {
-
+    // Skapa list-element
     const li = document.createElement("li");
-
     // Skapa länk + ta-bort-knapp
     li.innerHTML = `
-      <a href="${meal.url}" target="_blank">${meal.name}</a>
+      <a href="${meal.url || "#"}" target="_blank">${meal.name || meal}</a>
       <button class="remove-btn">❌</button>
     `;
-
-    // När man klickar på ❌
+    // När man klickar på ❌ → ta bort favorit
     li.querySelector(".remove-btn").addEventListener("click", () => {
-
-      const updatedFavorites = getFavorites();
-
-      // Ta bort rätt favorit via index
-      updatedFavorites.splice(index, 1);
-
-      // Spara nya listan
-      saveFavorites(updatedFavorites);
-
+      // Hämta aktuell lista
+      const updated = getFavorites();
+      // Ta bort rätt element
+      updated.splice(index, 1);
+      // Spara igen
+      saveFavorites(updated);
       // Rita om listan
       renderFavorites();
     });
-
+      // Lägg till i HTML
     favoritesList.appendChild(li);
   });
 }
 
 
 // ==============================
-// EVENT NÄR MAN KLICKAR "NY MATRÄTT"
+// 6. EVENTS
 // ==============================
 
+// ny slumpad maträtt
+// Klick på "ny maträtt"
 randomBtn.addEventListener("click", showRandomMeal);
 
+// spara favorit
+// Klick på hjärt-knappen → spara favorit
+saveBtn.addEventListener("click", () => {
+  // Om ingen rätt vald → gör inget
+  if (!currentMeal) return;
+
+  const favorites = getFavorites();
+  // Undvik dubbletter
+  const alreadySaved = favorites.some(f => f.name === currentMeal.name);
+  if (alreadySaved) return;
+
+  // Lägg till
+  favorites.push(currentMeal);
+  // Spara
+  saveFavorites(favorites);
+  // Uppdatera UI
+  renderFavorites();
+});
+
+// Formulär: lägg till egen maträtt + validering
+mealForm.addEventListener("submit", e => {
+  // Stoppar sid-reload
+  e.preventDefault();
+  // Ta bort mellanslag före och efter
+  const value = mealInput.value.trim();
+
+  if (value.length < 3) {
+    formMessage.textContent = "Minst 3 bokstäver.";
+    formMessage.style.color = "red";
+    return;
+  }
+  // Lägg till som favorit
+  const favorites = getFavorites();
+  favorites.push({ name: value, url: "#" });
+
+  saveFavorites(favorites);
+  renderFavorites();
+  // Success-meddelande
+  formMessage.textContent = "Sparad!";
+  formMessage.style.color = "lightgreen";
+  // Töm inputfält
+  mealInput.value = "";
+});
+
 
 // ==============================
-// KÖRS NÄR SIDAN LADDAS
+// 7. INIT
 // ==============================
-
-// Visa slumpad rätt direkt
 showRandomMeal();
-
-// Rita upp favoriter från localStorage
 renderFavorites();
+
